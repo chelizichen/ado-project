@@ -7,7 +7,7 @@ import { appModule } from "./router/app/app.module";
 @Modules({
   Modules: [appModule],
   Base: "/api",
-  Port: 3001,
+  Port: 3101,
   GlobalPipes: [],
 })
 class AdoNodeServerImpl extends AdoNodeServer {}

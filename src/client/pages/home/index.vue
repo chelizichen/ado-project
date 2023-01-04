@@ -1,7 +1,8 @@
 <template>
   <div>
-    @Ado/Node - VueSSR
+    <RouterView></RouterView>
   </div>
+  
 </template>
 
 <script setup lang="ts">

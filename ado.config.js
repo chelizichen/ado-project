@@ -1,12 +1,12 @@
 import { defineAdoNodeConfig } from "ado-node";
 
-export default defineAdoNodeConfig({
+module.exports =  defineAdoNodeConfig({
   database: {
     type: "mysql",
     host: "localhost",
     username: "root",
     password: "123456",
-    database: "test",
+    database: "lmr_medical",
     port: 3306,
     connectionLimit: 10,
   },
