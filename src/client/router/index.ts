@@ -71,7 +71,11 @@ router.beforeEach(async (to, from, next) => {
         userStore.setOwnerInfo(owner_data.data[0]);
         const permission = userStore.user_info?.u_permission as string;
         const menu = await ApiRouterMenu({ permission });
+
+        console.log("menu", menu);
+        
         const filterMenu = setAsyncRoutes(menu.data);
+        console.log("filterMenu", filterMenu);
         
         setMenu(filterMenu);
         filterMenu.forEach((el) => {
