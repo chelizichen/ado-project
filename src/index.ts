@@ -3,12 +3,11 @@ import express, { Express } from "express";
 import path from "path";
 import cors from "cors";
 import { appModule } from "./router/app/app.module";
+import { LogGlobalPipe } from "./pipe/Log.pipe";
 
 @Modules({
   Modules: [appModule],
-  Base: "/api",
-  Port: 3101,
-  GlobalPipes: [],
+  GlobalPipes: [LogGlobalPipe],
 })
 class AdoNodeServerImpl extends AdoNodeServer {}
 

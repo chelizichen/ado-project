@@ -10,7 +10,6 @@
       <div>
         <el-menu mode="horizontal" :ellipsis="false" :default-active="`1`">
           <el-menu-item index="1" @click="router.push(`/home/index`)">首页</el-menu-item>
-          <el-menu-item index="2" @click="router.push(`/home/news`)">新闻</el-menu-item>
           <el-menu-item index="3" @click="router.push(`/admin`)">管理</el-menu-item>
           <el-menu-item index="4" @click="router.push(`/home/login`)">登陆</el-menu-item>
         </el-menu>
