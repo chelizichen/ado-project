@@ -21,6 +21,8 @@ export class menuController extends AdoNodeController{
   async getRouter(@Query() query: { permission: string }) {
     const { permission } = query
     const data = await this.menuService.getRouter(permission);
+    console.log("data", data);
+    
     return ret.success(data)
   }
 

@@ -1,7 +1,6 @@
-import { defineAdoNodeConfig } from "ado-node";
-
-module.exports =  defineAdoNodeConfig({
+module.exports =  ({
   database: {
+    default:true,
     type: "mysql",
     host: "localhost",
     username: "root",

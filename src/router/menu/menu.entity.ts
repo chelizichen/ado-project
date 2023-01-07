@@ -16,6 +16,7 @@ export class menu extends AdoOrmBaseEntity{
   m_path!: string //
   
   m_component!: string //
+  
   @AutoCreate
   createTime!: string //
 }

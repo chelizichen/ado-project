@@ -1,6 +1,6 @@
 <template>
   <div>
-    User界面
+    MENU界面
   </div>
 </template>
 

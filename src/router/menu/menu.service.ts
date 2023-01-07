@@ -1,4 +1,4 @@
-import { Collect, Inject, getConnection, query } from "ado-node";
+import { Collect, Inject, getConnection,query } from "ado-node";
 import { menu } from "./menu.entity";
 
 @Collect()
@@ -11,11 +11,9 @@ export class menuService {
       let routerList: any[] = [];
       let sql = new query()
         .setEntity("menu")
-        .like_and({
-          m_permission: "'%" + permission + "%'",
-        })
+        .like_and("m_permission","'%" + permission + "%'")
         .getSql();
-
+      
       const conn = await getConnection();
       conn.query(sql, function (err: any, res: any[]) {
         if (err) {

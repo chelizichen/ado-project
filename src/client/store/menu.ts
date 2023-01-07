@@ -5,7 +5,7 @@ type __state__ = {
   menu: Array<router_menu>;
   asyncRoutesMark:boolean
 };
-const page = import.meta.glob("../pages/*/*.vue");
+const page = import.meta.glob("../pages/**/*/*.vue");
 
 
 let useMenuStore = defineStore("menu", {
@@ -24,7 +24,7 @@ let useMenuStore = defineStore("menu", {
       let filterMenu = menu.filter((el) => {
         if (el.component == "ADMIN") {
           // @ts-ignore
-          el.component = page["../pages/admin/index.vue"];
+          el.component = page["../pages/admin/layout/index.vue"];
           el.path = "/admin/" + el.path;
           const children = el.children.filter((el) => {
             let path = `../pages/${el.component}.vue`;
