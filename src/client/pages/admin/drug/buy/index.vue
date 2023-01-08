@@ -14,18 +14,14 @@
   <div>
     <el-table :data="state.list" style="width: 100%">
       <el-table-column prop="id" label="ID" width="180" />
-      <el-table-column prop="d_user_id" label="医生用户ID" width="180" />
-      <el-table-column prop="d_name" label="姓名" />
-      <el-table-column prop="d_age" label="年龄" />
-      <el-table-column prop="d_university" label="毕业学校" />
-      <el-table-column prop="d_education" label="学位学历" />
-      <el-table-column prop="d_major" label="专业" />
-      <el-table-column prop="d_level" label="职称" />
-      <el-table-column prop="d_intro" label="医生介绍" />
-      <el-table-column prop="d_photo" label="医生照片" />
-      <el-table-column prop="d_order_money" label="挂号费用" />
-      <el-table-column prop="d_work_date" label="开始工作时间" />
-      <el-table-column prop="d_depart_code" label="科室code" />
+      <el-table-column prop="o_user_id" label="用户ID" width="180" />
+      <el-table-column prop="o_doctor_id" label="医生ID" />
+      <el-table-column prop="o_order_id" label="订单ID" />
+      <el-table-column prop="o_step" label="时段" />
+      <el-table-column prop="o_sort" label="排号" />
+      <el-table-column prop="o_cost" label="花费" />
+      <el-table-column prop="o_is_pay" label="支付情况" />
+      <el-table-column prop="o_status" label="挂号状态" />
       <el-table-column prop="createTime" label="创建时间" />
       <el-table-column label="操作">
         <template #default="scope">
@@ -49,15 +45,15 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue';
-import { list, del } from '@/api/doctor';
-import { doctor__table } from '@/type/doctor';
+import { list, del } from '@/api/order';
+import { order__table } from '@/type/order';
 import { Pagination } from '@/type/common.d'
 import Edit from './edit.vue'
 import _ from 'lodash'
 import { ElNotification } from 'element-plus';
 import { pagination_options } from "@/utils/options"
 const state = reactive({
-  list: <Array<doctor__table>>[],
+  list: <Array<order__table>>[],
   total: 0,
   isAdd: false,
 
@@ -95,7 +91,7 @@ function handle_add() {
   dialogVal.value = {}
 }
 
-async function handle_del(item: doctor__table) {
+async function handle_del(item: order__table) {
   const data = await del({ id: item.id })
   // @ts-ignore
   if (data.code == 0) {

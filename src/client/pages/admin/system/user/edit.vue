@@ -29,7 +29,7 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch,computed } from 'vue'
+import { computed } from 'vue'
 import { update } from '@/api/user';
 import { user } from '@/type/user';
 

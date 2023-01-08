@@ -1,20 +1,23 @@
 <template>
   <el-dialog v-model="props.dialogFormVisible" :title="title" @closed="close">
     <el-form :model="props.val">
-      <el-form-item label="姓名" :label-width="formLabelWidth">
-        <el-input v-model="props.val.u_name" autocomplete="off" />
+      <el-form-item label="菜单名称" :label-width="formLabelWidth">
+        <el-input v-model="props.val.m_name" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="密码" :label-width="formLabelWidth">
-        <el-input v-model="props.val.u_password" autocomplete="off" />
+      <el-form-item label="菜单权限" :label-width="formLabelWidth">
+        <el-input v-model="props.val.m_permission" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="权限" :label-width="formLabelWidth">
-        <el-input v-model="props.val.u_permission" autocomplete="off" />
+      <el-form-item label="是否为根组件" :label-width="formLabelWidth">
+        <el-input v-model="props.val.m_is_root" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="电话号码" :label-width="formLabelWidth">
-        <el-input v-model="props.val.u_phone" autocomplete="off" />
+      <el-form-item label="根组件ID" :label-width="formLabelWidth">
+        <el-input v-model="props.val.m_root_id" autocomplete="off" />
       </el-form-item>
-      <el-form-item label="电子邮箱" :label-width="formLabelWidth">
-        <el-input v-model="props.val.u_email" autocomplete="off" />
+      <el-form-item label="组件名" :label-width="formLabelWidth">
+        <el-input v-model="props.val.m_path" autocomplete="off" />
+      </el-form-item>
+      <el-form-item label="组件路径" :label-width="formLabelWidth">
+        <el-input v-model="props.val.m_component" autocomplete="off" />
       </el-form-item>
     </el-form>
     <template #footer>
@@ -29,13 +32,13 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, watch,computed } from 'vue'
-import { update } from '@/api/user';
-import { user } from '@/type/user';
+import { computed } from 'vue'
+import { update } from '@/api/menu';
+import { menu__table } from '@/type/menu';
 
 const props = defineProps<{
   dialogFormVisible: boolean,
-  val: user,
+  val: menu__table,
   isAdd:boolean
 }>()
 

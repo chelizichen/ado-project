@@ -1,4 +1,4 @@
-import { AdoOrmBaseEntity, AutoCreate, Entity, Key } from "ado-node";
+import { AdoOrmBaseEntity, AutoCreate, Entity, Key, Keyword } from "ado-node";
 
 @Entity("department")
 export class department extends AdoOrmBaseEntity {
@@ -7,6 +7,7 @@ export class department extends AdoOrmBaseEntity {
   
   dep_code!: string; // 科室代码
 
+  @Keyword
   dep_name!: string; // 科室名称
 
   dep_total!: string; // 科室人数

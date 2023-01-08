@@ -1,4 +1,4 @@
-import { AdoOrmBaseEntity, AutoCreate, Entity, Key } from "ado-node";
+import { AdoOrmBaseEntity, AutoCreate, Entity, Key, Keyword } from "ado-node";
 
 @Entity("doctor")
 export class doctor extends AdoOrmBaseEntity{
@@ -7,6 +7,7 @@ export class doctor extends AdoOrmBaseEntity{
   
   d_user_id !: string   // 医生用户ID
   
+  @Keyword
   d_name !: string   // 姓名
   
   d_age !: string   // 年龄
