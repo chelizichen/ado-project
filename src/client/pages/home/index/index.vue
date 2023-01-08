@@ -9,40 +9,55 @@
       </div>
     </div>
     <!-- 项目介绍 -->
-    <div>
-      <div>知了医生</div>
-      <div>项目介绍</div>
-      <div>
-        黑龙江宝芝林中医馆创建于2017年8月，
-        为黑龙江省新崛起的中医馆，
-        坐落于美丽的冰城哈尔滨香坊区凯旋广场旁，
-        占地面积约一千平方米，
-        分为服务区（挂号、收银、药房）与诊疗区等，
-        为哈尔滨市较大的中医医馆。
+    <div class="intro">
+      <div class="title">知了医生</div>
+      <div class="sub_title">--项目介绍--</div>
+      <div class="text">
+        知了医生创建于2023年1月
+        <br>
+        为湖北省新崛起的线上医疗服务平台
+        <br>
+        提供服务（挂号、收银、药房）与诊疗等
+        <br>
+        为湖北省较大的线上医疗咨询公司。
       </div>
     </div>
     <!-- 服务介绍 -->
-    <div>
-      <div>服务介绍</div>
+    <div class="server">
+      <div class="title">服务介绍</div>
       <section class="fw">
-        <div v-for="(item) in fw_info" class="item">
-          <img :src="item.imgUrl" alt="">
-          <div>
-            <div>
-              {{item.title}}
-            </div>
-            <div>
-              {{item.desc}}
+        <div v-for="(item, index) in fw_info">
+          <div v-if="index % 2 == 0" class="item">
+            <img :src="item.imgUrl" alt="">
+            <div class="desc">
+              <div class="sub_title">
+                {{ item.title }}
+              </div>
+              <div class="text">
+                {{ item.desc }}
+              </div>
             </div>
           </div>
+          <div v-if="index % 2 != 0" class="item">
+            <div class="desc" style="text-align:right">
+              <div class="sub_title">
+                {{ item.title }}
+              </div>
+              <div class="text">
+                {{ item.desc }}
+              </div>
+            </div>
+            <img :src="item.imgUrl" alt="">
+          </div>
         </div>
+
       </section>
     </div>
     <!-- 知了医生连接 -->
     <div class="link">
       <section>
         <div>
-          <img :src="Logo" alt="" class="logo" >
+          <img :src="Logo" alt="" class="logo">
         </div>
       </section>
       <section>
@@ -66,64 +81,48 @@
             社区管理
           </div>
         </div>
+      </section>
+      <section class="kjjs">
         <div>
           <div>
-            解决方案
+            框架技术
           </div>
           <div>
-            课程培训
+            <a href="">Ado</a>
           </div>
           <div>
-            医疗健康
+            <a href="">Vue</a>
           </div>
           <div>
-            政务民生
+            <a href="">Element</a>
           </div>
           <div>
-            场地会馆
+            <a href="">TypeScript</a>
           </div>
           <div>
-            社区管理
+            <a href="">Vite</a>
           </div>
         </div>
+      </section>
+      <section>
         <div>
           <div>
-            解决方案
+            联系方式
           </div>
           <div>
-            课程培训
+            QQ
           </div>
           <div>
-            医疗健康
+            微信
           </div>
           <div>
-            政务民生
+            邮箱
           </div>
           <div>
-            场地会馆
+            电话
           </div>
           <div>
-            社区管理
-          </div>
-        </div>
-        <div>
-          <div>
-            解决方案
-          </div>
-          <div>
-            课程培训
-          </div>
-          <div>
-            医疗健康
-          </div>
-          <div>
-            政务民生
-          </div>
-          <div>
-            场地会馆
-          </div>
-          <div>
-            社区管理
+            微博
           </div>
         </div>
       </section>
@@ -137,30 +136,30 @@ import { ElButton } from 'element-plus';
 import Logo from '@/assets/Logo.jpeg'
 const to_fw_icons_array = Object.values(fw_icons)
 const fw_info = [{
-  title:"预约挂号",
-  imgUrl:"",
-  desc:"提前预约预约医生时间，方便快捷，诊所资源调配轻松有序。"
-},{
-  title:"经营管理",
-  imgUrl:"",
-  desc:"强大的数据信息.查询.分析功能，多维度经营统计报表。"
-},{
-  title:"医生信息展示",
-  imgUrl:"",
-  desc:"医生职位职级展示，详细的履历介绍和技术呈现。让患者放心选择适合自己的医生。"
-},{
-  title:"排班管理",
-  imgUrl:"",
-  desc:"医护人员排班便利，值班信息灵活调整，排班清晰一目了然。"
-},{
-  title:"会员管理系统",
-  imgUrl:"",
-  desc:"精准了解会员属性， 精细化会员管理，提高复购及转化。"
-},{
-  title:"数据分析",
-  imgUrl:"",
-  desc:"提供实时记录、统计交易信息、交易数据清算，全局控制。"
-}].map((el,index)=>{
+  title: "预约挂号",
+  imgUrl: "",
+  desc: "提前预约预约医生时间，方便快捷，诊所资源调配轻松有序。"
+}, {
+  title: "经营管理",
+  imgUrl: "",
+  desc: "强大的数据信息.查询.分析功能，多维度经营统计报表。"
+}, {
+  title: "医生信息展示",
+  imgUrl: "",
+  desc: "医生职位职级展示，详细的履历介绍和技术呈现。让患者放心选择适合自己的医生。"
+}, {
+  title: "排班管理",
+  imgUrl: "",
+  desc: "医护人员排班便利，值班信息灵活调整，排班清晰一目了然。"
+}, {
+  title: "会员管理系统",
+  imgUrl: "",
+  desc: "精准了解会员属性， 精细化会员管理，提高复购及转化。"
+}, {
+  title: "数据分析",
+  imgUrl: "",
+  desc: "提供实时记录、统计交易信息、交易数据清算，全局控制。"
+}].map((el, index) => {
   //@ts-ignore
   el.imgUrl = to_fw_icons_array[index].default
   return el
@@ -216,18 +215,98 @@ const fw_info = [{
   }
 }
 
-.fw {
-  .flex_space_between();
-  flex-wrap: wrap;
-  margin: 0 10%;
+
+.intro {
+  display: flex;
+  align-items: center;
   width: 80%;
+  margin: 0 10%;
+  flex-direction: column;
+
+  .title {
+    font-size: 26px;
+    letter-spacing: 4px;
+    font-weight: 900;
+    margin: 10px 0;
+  }
+
+  .sub_title {
+    font-size: 18px;
+    letter-spacing: 2px;
+    font-weight: 900;
+  }
+
+  .text {
+    text-align: center;
+    letter-spacing: 3px;
+    border: 2px dashed rgb(138, 112, 112);
+    padding: 20px 200px;
+    font-size: 24px;
+    margin: 10px 0;
+    font-weight: 500;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  }
 }
 
-.link{
-  .logo{
+.server {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 40px 0;
+  .title {
+    font-size: 26px;
+    letter-spacing: 4px;
+    font-weight: 900;
+    margin: 10px 0;
+  }
+
+  .fw {
+    .flex_space_between();
+    flex-wrap: wrap;
+    margin: 0 10%;
+    width: 80%;
+
+    .item {
+      width: 100%;
+      .flex_space_between();
+      flex-wrap: wrap;
+      .desc {
+        margin: 0 30px;
+
+        .sub_title {
+          font-size: 26px;
+        }
+
+        .text {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(235, 235, 235);
+  border-top: 2px dashed black;
+  padding: 20px;
+  section{
+    text-align: center;
+  }
+  .logo {
     width: 70px;
     height: 70px;
     border-radius: 50%;
+  }
+  .kjjs{
+    a{
+      text-decoration: none;
+      color: black;
+    }
   }
 }
 </style>
