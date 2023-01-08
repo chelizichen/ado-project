@@ -1,4 +1,5 @@
 import { Collect, Inject, getConnection,query } from "ado-node";
+import { Pagination } from "../../type/common";
 import { menu } from "./menu.entity";
 
 @Collect()
@@ -59,5 +60,39 @@ export class menuService {
         resolve(newRouterList);
       });
     });
+  }
+
+  async List(query:Pagination){
+    let {keyword,page,size} = query
+    let sql = ""
+    let data:any;
+    let total:any;
+    if(keyword){
+      keyword = "%"+keyword+"%"
+      sql = `select * from menu where m_name like ? limit ?,?`
+      let count = `select count(*) as total from menu where m_name like ?`
+      // @ts-ignore
+       data = await this.Menu.getMany(sql,[keyword,Number(page),Number(size)])
+       // @ts-ignore
+       total = await this.Menu.getMany(count,[keyword])
+    }else{
+      sql = "select * from menu limit ?,?"
+      let count = `select count(*) as total from menu`
+      // @ts-ignore
+       data =  await this.Menu.getMany(sql,[Number(page),Number(size)])
+       // @ts-ignore
+       total = await this.Menu.getMany(count)
+      }
+    return {data,total:total[0]['total']}
+}
+  async update(menu:menu){
+    const {id} = menu
+    let data:any;
+    if(id){
+      data = await this.Menu.update(menu)
+    }else{
+      data = await this.Menu.save(menu)
+    }
+    return data
   }
 }

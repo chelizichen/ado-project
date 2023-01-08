@@ -1,11 +1,11 @@
 export type menu__table = {
   id: string;
-  menuName: string;
-  menuPermission: string;
-  menuIsRoot: string;
-  menuRootId: string;
-  menuPath: string;
-  menuComponent: string;
+  m_name: string;
+  m_permission: string;
+  m_is_root: string;
+  m_root_id: string;
+  m_path: string;
+  m_component: string;
   createTime: Date;
 };
 

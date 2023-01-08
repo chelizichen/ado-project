@@ -11,6 +11,10 @@ let routes: RouteRecordRaw[] = [
   },
   {
     path: "/home",
+    redirect: "/home/index",
+  },
+  {
+    path: "/home",
     component: () => import("@/pages/home/index.vue"),
     children: [
       {
@@ -79,6 +83,7 @@ router.beforeEach(async (to, from, next) => {
         
         setMenu(filterMenu);
         filterMenu.forEach((el) => {
+          // @ts-ignore
           router.addRoute(el);
         });
         setAsyncRoutesMark(true);

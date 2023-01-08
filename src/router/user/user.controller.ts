@@ -1,7 +1,8 @@
-import { AdoNodeController, Controller, Get, Inject, Query } from "ado-node";
+import { AdoNodeController, Body, Controller, Get, Inject, Post, Query } from "ado-node";
 import { UserService } from "./user.service";
 import { ret } from "../../config/ret";
 import { Pagination, QueryId } from "../../type/common";
+import { User } from "./user.entity";
 
 @Controller("/user")
 export class UserController extends AdoNodeController {
@@ -22,6 +23,18 @@ export class UserController extends AdoNodeController {
   @Get("/list")
   async list(@Query() query:Pagination){
     const data = await this.UserService.List(query)
+    return ret.success(data)
+  }
+
+  @Post("/update")
+  async update(@Body() body:User){
+    const data = await this.UserService.update(body)
+    return ret.success(data)
+  }
+
+  @Get("/del")
+  async del(@Query() query:QueryId){
+    const data = await this.UserService.User.delOneBy(query.id);
     return ret.success(data)
   }
 }

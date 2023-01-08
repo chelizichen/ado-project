@@ -12,18 +12,34 @@ export class UserService {
       let {keyword,page,size} = query
       let sql = ""
       let data:any;
+      let total:any;
       if(keyword){
         keyword = "%"+keyword+"%"
         sql = `select * from user where u_name like ? limit ?,?`
+        let count = `select count(*) as total from user where u_name like ?`
         // @ts-ignore
          data = await this.User.getMany(sql,[keyword,Number(page),Number(size)])
-
+         // @ts-ignore
+         total = await this.User.getMany(count,[keyword])
       }else{
         sql = "select * from user limit ?,?"
+        let count = `select count(*) as total from user`
         // @ts-ignore
          data =  await this.User.getMany(sql,[Number(page),Number(size)])
-      }
-      
-      return data
+         // @ts-ignore
+         total = await this.User.getMany(count)
+        }
+      return {data,total:total[0]['total']}
+  }
+
+  async update(User:User){
+    const {id} = User
+    let data:any;
+    if(id){
+      data = await this.User.update(User)
+    }else{
+      data = await this.User.save(User)
+    }
+    return data
   }
 }

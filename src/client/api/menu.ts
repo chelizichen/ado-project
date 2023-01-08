@@ -1,4 +1,4 @@
-import { QueryId } from "@/type/common";
+import { Pagination, QueryId } from "@/type/common";
 import { menu__table, update_menu, add_menu } from "@/type/menu";
 import request from "@/utils/axios";
 
@@ -9,11 +9,11 @@ export function ApiRouterMenu(params: { permission: string }) {
   })
 }
 
-export function list(params: { permission: string }) {
+export function list(params: Pagination) {
   return request({
     url: "menu/list",
     params,
-  }) as unknown as { data: Array<menu__table> };
+  })
 } 
 
 
