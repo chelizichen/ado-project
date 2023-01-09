@@ -19,8 +19,8 @@ export class registerService{
            data = await this.Order.getMany(sql,[keyword,Number(page),Number(size)])
            total = await this.Order.getMany(count,[keyword])
         }else{
-          sql = "select * from d_order limit ?,? where IS NULL(o_drug.ids)"
-          let count = `select count(*) as total from d_order where IS NULL(o_drug.ids)`
+          sql = "select * from d_order limit ?,? where IS NULL(o_drug_ids)"
+          let count = `select count(*) as total from d_order where IS NULL(o_drug_ids)`
            data =  await this.Order.getMany(sql,[Number(page),Number(size)])
            total = await this.Order.getMany(count)
           }
@@ -56,8 +56,8 @@ export class drugService{
            data = await this.Order.getMany(sql,[keyword,Number(page),Number(size)])
            total = await this.Order.getMany(count,[keyword])
         }else{
-          sql = "select * from d_order where  IS NOT NULL(o_drug.ids) limit ?,? "
-          let count = `select count(*) as total from d_order where  IS NOT NULL(o_drug.ids)`
+          sql = "select * from d_order where  IS NOT NULL(o_drug_ids) limit ?,? "
+          let count = `select count(*) as total from d_order where  IS NOT NULL(o_drug_ids)`
            data =  await this.Order.getMany(sql,[Number(page),Number(size)])
            total = await this.Order.getMany(count)
           }
