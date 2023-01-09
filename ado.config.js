@@ -11,6 +11,7 @@ module.exports =  ({
   },
   server:{
     port:3101,
-    base:"/api"
+    base:"/api",
+    upload:"public/upload"
   }
 });
