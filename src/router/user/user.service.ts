@@ -17,16 +17,12 @@ export class UserService {
         keyword = "%"+keyword+"%"
         sql = `select * from user where u_name like ? limit ?,?`
         let count = `select count(*) as total from user where u_name like ?`
-        // @ts-ignore
          data = await this.User.getMany(sql,[keyword,Number(page),Number(size)])
-         // @ts-ignore
          total = await this.User.getMany(count,[keyword])
       }else{
         sql = "select * from user limit ?,?"
         let count = `select count(*) as total from user`
-        // @ts-ignore
          data =  await this.User.getMany(sql,[Number(page),Number(size)])
-         // @ts-ignore
          total = await this.User.getMany(count)
         }
       return {data,total:total[0]['total']}
