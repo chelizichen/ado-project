@@ -5,6 +5,8 @@ export class drug extends AdoOrmBaseEntity{
     @Key
     id!:string;
 
+    dr_code!:string; // 药品统一编码
+
     @Keyword
     dr_name!:string;
 

@@ -6,7 +6,7 @@
       <el-select v-model="pagination.size" placeholder="Select">
         <el-option v-for="item in pagination_options" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
-      <el-button type="primary" size="middle" @click="list(pagination)">搜索</el-button>
+      <el-button type="primary" size="middle" @click="drug_list(pagination)">搜索</el-button>
       <el-button type="primary" size="middle" @click="handle_add">添加</el-button>
     </div>
   </div>
@@ -14,15 +14,11 @@
   <div>
     <el-table :data="state.list" style="width: 100%">
       <el-table-column prop="id" label="ID" width="180" />
-      <el-table-column prop="o_user_id" label="用户ID" width="180" />
-      <el-table-column prop="o_doctor_id" label="医生ID" />
-      <el-table-column prop="o_order_id" label="订单ID" />
-      <el-table-column prop="o_step" label="时段" />
-      <el-table-column prop="o_sort" label="排号" />
-      <el-table-column prop="o_cost" label="花费" />
-      <el-table-column prop="o_is_pay" label="支付情况" />
-      <el-table-column prop="o_status" label="挂号状态" />
-      <el-table-column prop="createTime" label="创建时间" />
+      <el-table-column prop="dr_code" label="药品代码" width="180" />
+      <el-table-column prop="dr_name" label="药品名称" />
+      <el-table-column prop="dr_price" label="药品价格" />
+      <el-table-column prop="dr_useage" label="药品用法" />
+      <el-table-column prop="dr_remark" label="药品备注" />
       <el-table-column label="操作">
         <template #default="scope">
           <el-button type="primary" size="small" @click="handle_edit(scope.row)">编辑</el-button>
@@ -45,15 +41,15 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue';
-import { list, del } from '@/api/order';
-import { order__table } from '@/type/order';
+import { drug_list, drug_del } from '@/api/drug';
+import { drug__table } from '@/type/drug';
 import { Pagination } from '@/type/common.d'
 import Edit from './edit.vue'
 import _ from 'lodash'
 import { ElNotification } from 'element-plus';
 import { pagination_options } from "@/utils/options"
 const state = reactive({
-  list: <Array<order__table>>[],
+  list: <Array<drug__table>>[],
   total: 0,
   isAdd: false,
 
@@ -91,8 +87,8 @@ function handle_add() {
   dialogVal.value = {}
 }
 
-async function handle_del(item: order__table) {
-  const data = await del({ id: item.id })
+async function handle_del(item: drug__table) {
+  const data = await drug_del({ id: item.id })
   // @ts-ignore
   if (data.code == 0) {
     //删除成功函数    
@@ -102,7 +98,7 @@ async function handle_del(item: order__table) {
 }
 
 async function init() {
-  const { data } = await list(pagination.value)
+  const { data } = await drug_list(pagination.value)
   const { data: _list, total } = data
   state.list = _list
   state.total = total;

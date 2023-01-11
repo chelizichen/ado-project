@@ -16,16 +16,12 @@ export class departmentService{
           keyword = "%"+keyword+"%"
           sql = `select * from department where dep_name like ? limit ?,?`
           let count = `select count(*) as total from department where dep_name like ?`
-          // @ts-ignore
            data = await this.Department.getMany(sql,[keyword,Number(page),Number(size)])
-           // @ts-ignore
            total = await this.Department.getMany(count,[keyword])
         }else{
           sql = "select * from department limit ?,?"
           let count = `select count(*) as total from department`
-          // @ts-ignore
            data =  await this.Department.getMany(sql,[Number(page),Number(size)])
-           // @ts-ignore
            total = await this.Department.getMany(count)
           }
         return {data,total:total[0]['total']}

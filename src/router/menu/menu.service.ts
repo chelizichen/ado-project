@@ -55,8 +55,6 @@ export class menuService {
           });
           return newObj
         });
-        console.log("newRouterList", newRouterList);
-
         resolve(newRouterList);
       });
     });
@@ -71,16 +69,12 @@ export class menuService {
       keyword = "%"+keyword+"%"
       sql = `select * from menu where m_name like ? limit ?,?`
       let count = `select count(*) as total from menu where m_name like ?`
-      // @ts-ignore
        data = await this.Menu.getMany(sql,[keyword,Number(page),Number(size)])
-       // @ts-ignore
        total = await this.Menu.getMany(count,[keyword])
     }else{
       sql = "select * from menu limit ?,?"
       let count = `select count(*) as total from menu`
-      // @ts-ignore
        data =  await this.Menu.getMany(sql,[Number(page),Number(size)])
-       // @ts-ignore
        total = await this.Menu.getMany(count)
       }
     return {data,total:total[0]['total']}

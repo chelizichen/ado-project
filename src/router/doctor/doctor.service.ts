@@ -16,16 +16,12 @@ export class doctorService{
       keyword = "%"+keyword+"%"
       sql = `select * from doctor where d_name like ? limit ?,?`
       let count = `select count(*) as total from doctor where d_name like ?`
-      // @ts-ignore
        data = await this.Doctor.getMany(sql,[keyword,Number(page),Number(size)])
-       // @ts-ignore
        total = await this.Doctor.getMany(count,[keyword])
     }else{
       sql = "select * from doctor limit ?,?"
       let count = `select count(*) as total from doctor`
-      // @ts-ignore
        data =  await this.Doctor.getMany(sql,[Number(page),Number(size)])
-       // @ts-ignore
        total = await this.Doctor.getMany(count)
       }
     return {data,total:total[0]['total']}
