@@ -11,7 +11,7 @@
  Target Server Version : 80031
  File Encoding         : 65001
 
- Date: 09/01/2023 23:25:35
+ Date: 11/01/2023 23:04:57
 */
 
 SET NAMES utf8mb4;
@@ -35,12 +35,13 @@ CREATE TABLE `d_order`  (
   `o_drug_ids` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `createTime` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of d_order
 -- ----------------------------
 INSERT INTO `d_order` VALUES (1, 2, 1, 1000001, '12.00', '1', 100.00, '0', '0', '无', NULL, '2023-01-08 15:00:13');
+INSERT INTO `d_order` VALUES (2, 2, 1, 100002, NULL, NULL, 200.00, '0', '0', '无 ', '测试药品书', '2023-01-11 22:34:18');
 
 -- ----------------------------
 -- Table structure for department
@@ -118,15 +119,17 @@ CREATE TABLE `drug`  (
   `id` int NOT NULL AUTO_INCREMENT,
   `dr_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `dr_price` decimal(10, 2) NULL DEFAULT NULL,
-  `dr_useage` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `dr_usage` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `dr_remark` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `dr_code` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT ' ',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of drug
 -- ----------------------------
-INSERT INTO `drug` VALUES (1, '测试药瓶', 10.00, '1天三次', '无');
+INSERT INTO `drug` VALUES (1, '测试药瓶', 10.00, '1天三次', '无', 'x1022012');
+INSERT INTO `drug` VALUES (2, '测试药品1', 20.00, '2天1此', '无', 'zx123gas');
 
 -- ----------------------------
 -- Table structure for menu
