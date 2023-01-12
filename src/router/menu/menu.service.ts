@@ -1,4 +1,4 @@
-import { Collect, Inject, getConnection,query } from "ado-node";
+import { Collect, Inject, getConnection,query,gerRedis } from "ado-node";
 import { Pagination } from "../../type/common";
 import { menu } from "./menu.entity";
 
@@ -8,6 +8,15 @@ export class menuService {
   Menu!: menu;
 
   async getRouter(permission: string) {
+    const redis = await gerRedis()
+    if(!redis.isOpen){
+      await redis.connect()
+    }
+    let menu = await redis.get("menu")
+    if(menu){
+      console.log("走缓存");
+      return JSON.parse(menu)
+    }
     return new Promise(async (resolve, reject) => {
       let routerList: any[] = [];
       let sql = new query()
@@ -56,6 +65,7 @@ export class menuService {
           return newObj
         });
         resolve(newRouterList);
+        redis.set("menu",JSON.stringify(newRouterList))
       });
     });
   }
