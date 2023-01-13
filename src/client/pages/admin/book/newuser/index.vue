@@ -2,7 +2,7 @@
   <!-- 选项 -->
   <div>
     <div class="search">
-      <el-input v-model="pagination.keyword" placeholder="搜索" />
+      <el-input v-model="pagination.keyword"  placeholder="搜索"/>
       <el-select v-model="pagination.size" placeholder="Select">
         <el-option v-for="item in pagination_options" :key="item.value" :label="item.label" :value="item.value" />
       </el-select>
@@ -14,12 +14,13 @@
   <div>
     <el-table :data="state.list" style="width: 100%">
       <el-table-column prop="id" label="ID" width="180" />
-      <el-table-column prop="m_name" label="菜单名称" width="180" />
-      <el-table-column prop="m_permission" label="菜单权限" />
-      <el-table-column prop="m_is_root" label="是否为根组件" />
-      <el-table-column prop="m_root_id" label="根组件ID" />
-      <el-table-column prop="m_path" label="菜单路由" />
-      <el-table-column prop="m_component" label="菜单组件" />
+      <el-table-column prop="name" label="姓名" width="180" />
+      <el-table-column prop="phone" label="电话" />
+      <el-table-column prop="type" label="类型" />
+      <el-table-column prop="opt" label="选项" />
+      <el-table-column prop="isold" label="是否为新用户" />
+      <el-table-column prop="desc" label="描述" />
+      <el-table-column prop="date" label="预约时间" />
       <el-table-column prop="createTime" label="创建时间" />
       <el-table-column label="操作">
         <template #default="scope">
@@ -29,15 +30,12 @@
               <el-button type="danger" size="small">删除</el-button>
             </template>
           </el-popconfirm>
+
         </template>
       </el-table-column>
     </el-table>
     <div class="pagination">
-      <el-pagination background :current-page="pagination.page+1" 
-      :page-size="pagination.size" layout="prev, pager, next"
-        :total="state.total" @current-change="pageChange" 
-        @size-change="sizeChange"
-        />
+      <el-pagination background layout="prev, pager, next" :total="state.total" />
     </div>
   </div>
   <Edit :dialogFormVisible="dialogFormVisible" :val="dialogVal" @close="handle_close" @success="handle_success"
@@ -46,15 +44,15 @@
 
 <script setup lang="ts">
 import { onMounted, reactive, ref } from 'vue';
-import { list, del } from '@/api/menu';
-import { menu__table } from '@/type/menu';
+import { list, del } from '@/api/book';
+import { book__table } from '@/type/book';
 import { Pagination } from '@/type/common.d'
 import Edit from './edit.vue'
 import _ from 'lodash'
 import { ElNotification } from 'element-plus';
 import { pagination_options } from "@/utils/options"
 const state = reactive({
-  list: <Array<menu__table>>[],
+  list: <Array<book__table>>[],
   total: 0,
   isAdd: false,
 
@@ -92,23 +90,7 @@ function handle_add() {
   dialogVal.value = {}
 }
 
-function pageChange(page: number) {
-  console.log(page);
-  pagination.value.page = page - 1
-  init()
-}
-
-
-
-function sizeChange(size: number) {
-  console.log('size', size);
-  
-  pagination.value.size = size
-  init()
-}
-
-
-async function handle_del(item: menu__table) {
+async function handle_del(item: book__table) {
   const data = await del({ id: item.id })
   // @ts-ignore
   if (data.code == 0) {

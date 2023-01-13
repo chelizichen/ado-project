@@ -14,6 +14,10 @@ let routes: RouteRecordRaw[] = [
     redirect: "/home/index",
   },
   {
+    path: "/device",
+    component:()=>import("@/pages/device.vue")
+  },
+  {
     path: "/home",
     component: () => import("@/pages/home/index.vue"),
     children: [

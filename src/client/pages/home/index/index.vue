@@ -5,7 +5,7 @@
       <span class="use">适用于社区医院.诊所.中医院.门诊部等医疗机构</span>
       <div class="btn">
         <el-button size="large" plain>扫码体验</el-button>
-        <el-button size="large" type="warning" plain>免费试用</el-button>
+        <el-button size="large" type="warning" plain @click="router.push(`/admin`)">免费试用</el-button>
       </div>
     </div>
     <!-- 项目介绍 -->
@@ -22,6 +22,7 @@
         为湖北省较大的线上医疗咨询公司。
       </div>
     </div>
+    <el-progress :percentage="100" :format="format" :indeterminate="true" status="success" color="#2776ca" style="marginLeft:20px"/>
     <!-- 服务介绍 -->
     <div class="server">
       <div class="title">服务介绍</div>
@@ -134,6 +135,7 @@
 import { fw_icons } from '@/assets';
 import { ElButton } from 'element-plus';
 import Logo from '@/assets/Logo.jpeg'
+import { useRouter } from 'vue-router';
 const to_fw_icons_array = Object.values(fw_icons)
 const fw_info = [{
   title: "预约挂号",
@@ -160,10 +162,11 @@ const fw_info = [{
   imgUrl: "",
   desc: "提供实时记录、统计交易信息、交易数据清算，全局控制。"
 }].map((el, index) => {
-  //@ts-ignore
   el.imgUrl = to_fw_icons_array[index].default
   return el
 })
+const format = (percentage:number) => (percentage == 100 ? `` : ``)
+const router = useRouter()
 
 
 
@@ -219,21 +222,24 @@ const fw_info = [{
 .intro {
   display: flex;
   align-items: center;
-  width: 80%;
-  margin: 0 10%;
+  width: 100%;
+  padding: 0 10%;
   flex-direction: column;
+  box-sizing: border-box;
+  margin: 60px 0 ;
 
   .title {
-    font-size: 26px;
+    font-size: 48px;
     letter-spacing: 4px;
     font-weight: 900;
     margin: 10px 0;
   }
 
   .sub_title {
-    font-size: 18px;
+    font-size: 26px;
     letter-spacing: 2px;
-    font-weight: 900;
+    font-weight: 300;
+
   }
 
   .text {
@@ -241,9 +247,10 @@ const fw_info = [{
     letter-spacing: 3px;
     border: 2px dashed rgb(138, 112, 112);
     padding: 20px 200px;
+    border-radius: 30px;
     font-size: 24px;
     margin: 10px 0;
-    font-weight: 500;
+    font-weight: 200;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   }
 }
@@ -255,7 +262,7 @@ const fw_info = [{
   flex-direction: column;
   margin: 40px 0;
   .title {
-    font-size: 26px;
+    font-size: 48px;
     letter-spacing: 4px;
     font-weight: 900;
     margin: 10px 0;
@@ -271,6 +278,7 @@ const fw_info = [{
       width: 100%;
       .flex_space_between();
       flex-wrap: wrap;
+      margin: 40px 0;
       .desc {
         margin: 0 30px;
 

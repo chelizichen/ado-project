@@ -1,4 +1,4 @@
-import { Collect, Inject, getConnection,query,gerRedis } from "ado-node";
+import { Collect, Inject, getConnection, query, gerRedis } from "ado-node";
 import { Pagination } from "../../type/common";
 import { menu } from "./menu.entity";
 
@@ -9,11 +9,11 @@ export class menuService {
 
   async getRouter(permission: string) {
     const redis = await gerRedis()
-    if(!redis.isOpen){
+    if (!redis.isOpen) {
       await redis.connect()
     }
     let menu = await redis.get("menu")
-    if(menu){
+    if (menu) {
       console.log("走缓存");
       return JSON.parse(menu)
     }
@@ -21,9 +21,9 @@ export class menuService {
       let routerList: any[] = [];
       let sql = new query()
         .setEntity("menu")
-        .like_and("m_permission","'%" + permission + "%'")
+        .like_and("m_permission", "'%" + permission + "%'")
         .getSql();
-      
+
       const conn = await getConnection();
       conn.query(sql, function (err: any, res: any[]) {
         if (err) {
@@ -55,46 +55,60 @@ export class menuService {
           newObj.name = el.m_name;
           newObj.path = el.m_path;
           newObj.component = el.m_component;
-          newObj.children = el.children.map((cd:any) => {
-            let newObj1: Record<string, any> = {};
-            newObj1.name = cd.m_name;
-            newObj1.path = cd.m_path;
-            newObj1.component = cd.m_component;
-            return newObj1;
-          });
+          if (el.children) {
+            newObj.children = el.children.map((cd: any) => {
+              let newObj1: Record<string, any> = {};
+              newObj1.name = cd.m_name;
+              newObj1.path = cd.m_path;
+              newObj1.component = cd.m_component;
+              return newObj1;
+            });
+          } else {
+            newObj.children = []
+          }
+
           return newObj
         });
         resolve(newRouterList);
-        redis.set("menu",JSON.stringify(newRouterList))
+        redis.set("menu", JSON.stringify(newRouterList))
       });
     });
   }
 
-  async List(query:Pagination){
-    let {keyword,page,size} = query
+  async List(query: Pagination) {
+    let { keyword, page, size } = query
     let sql = ""
-    let data:any;
-    let total:any;
-    if(keyword){
-      keyword = "%"+keyword+"%"
+    let data: any;
+    page = page * size;
+    let total: any;
+    if (keyword) {
+      keyword = "%" + keyword + "%"
       sql = `select * from menu where m_name like ? limit ?,?`
       let count = `select count(*) as total from menu where m_name like ?`
-       data = await this.Menu.getMany(sql,[keyword,Number(page),Number(size)])
-       total = await this.Menu.getMany(count,[keyword])
-    }else{
+      data = await this.Menu.getMany(sql, [keyword, Number(page), Number(size)])
+      total = await this.Menu.getMany(count, [keyword])
+    } else {
       sql = "select * from menu limit ?,?"
       let count = `select count(*) as total from menu`
-       data =  await this.Menu.getMany(sql,[Number(page),Number(size)])
-       total = await this.Menu.getMany(count)
-      }
-    return {data,total:total[0]['total']}
-}
-  async update(menu:menu){
-    const {id} = menu
-    let data:any;
-    if(id){
+      data = await this.Menu.getMany(sql, [Number(page), Number(size)])
+      total = await this.Menu.getMany(count)
+    }
+    return { data, total: total[0]['total'] }
+  }
+  async update(menu: menu) {
+    const redis = await gerRedis();
+    if (!redis.isOpen) {
+      await redis.connect();
+    }
+    let _menu = await redis.get("menu");
+    if (_menu) {
+      await redis.del("menu")
+    }
+    const { id } = menu
+    let data: any;
+    if (id) {
       data = await this.Menu.update(menu)
-    }else{
+    } else {
       data = await this.Menu.save(menu)
     }
     return data

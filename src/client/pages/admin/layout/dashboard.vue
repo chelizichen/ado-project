@@ -1,11 +1,10 @@
 <template>
   <div>
-    白板
+    欢迎使用知了医生项目管理平台
   </div>
 </template>
 
 <script setup lang="ts">
-console.log("百般");
 
 </script>
 

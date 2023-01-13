@@ -65,7 +65,6 @@ const form = reactive({
   name: "",
   isold: false,
   date: "",
-  delivery: false,
   type: "",
   opt: [],
   desc: "",

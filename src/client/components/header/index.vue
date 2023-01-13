@@ -8,10 +8,10 @@
         <div class="cumulus">知了医生</div>
       </div>
       <div>
-        <el-menu mode="horizontal" :ellipsis="false" :default-active="`1`">
-          <el-menu-item index="1" @click="router.push(`/home/index`)">首页</el-menu-item>
-          <el-menu-item index="3" @click="router.push(`/admin`)">管理</el-menu-item>
-          <el-menu-item index="4" @click="router.push(`/home/login`)">登陆</el-menu-item>
+        <el-menu mode="horizontal" :ellipsis="false" :default-active="route.path" router="true">
+          <el-menu-item index="1" route="/home/index" >首页</el-menu-item>
+          <el-menu-item index="3" route="/admin" >管理</el-menu-item>
+          <el-menu-item index="4" route="/home/login">登陆</el-menu-item>
         </el-menu>
       </div>
     </div>
@@ -20,8 +20,20 @@
 
 <script setup lang="ts">
 import Logo from '@/assets/Logo.jpeg'
-import { useRouter } from 'vue-router';
-const router = useRouter()
+import { reactive, watch } from 'vue';
+import {  useRoute, useRouter } from 'vue-router';
+const [route,router] = [useRoute(),useRouter()]
+const state = reactive({
+  is_home:false
+})
+watch(route, function (val) {
+  const { fullPath } = val
+  if (fullPath == "/home/index") {
+    state.is_home = true
+  } else {
+    state.is_home = false
+  }
+})
 </script>
 
 <style scoped lang="less">
