@@ -12,6 +12,7 @@ module.exports =  ({
   server:{
     port:3101,
     base:"/api",
-    upload:"public/upload"
+    upload: "public/upload",
+    desc:"知了医生互联网医疗服务平台"
   }
 });

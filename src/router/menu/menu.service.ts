@@ -1,4 +1,4 @@
-import { Collect, Inject, getConnection, query, gerRedis } from "ado-node";
+import { Collect, Inject, getConnection, query, getRedis } from "ado-node";
 import { Pagination } from "../../type/common";
 import { menu } from "./menu.entity";
 
@@ -8,7 +8,7 @@ export class menuService {
   Menu!: menu;
 
   async getRouter(permission: string) {
-    const redis = await gerRedis()
+    const redis = await getRedis()
     if (!redis.isOpen) {
       await redis.connect()
     }
@@ -96,7 +96,7 @@ export class menuService {
     return { data, total: total[0]['total'] }
   }
   async update(menu: menu) {
-    const redis = await gerRedis();
+    const redis = await getRedis();
     if (!redis.isOpen) {
       await redis.connect();
     }
