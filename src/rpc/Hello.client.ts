@@ -12,8 +12,8 @@ class helloController {
     const { name,value,age } = body;
     return {
       name,
-      value,
       age,
+      value,
     };
   }
 }
