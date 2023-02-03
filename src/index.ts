@@ -1,14 +1,10 @@
-import { AdoNodeServer, Modules, RpcClientModules } from "ado-node";
+import { AdoNodeServer, Modules } from "ado-node";
 import express, { Express } from "express";
 import path from "path";
 import cors from "cors";
 import { appModule } from "./router/app/app.module";
 import { LogGlobalPipe } from "./pipe/Log.pipe";
-import { helloController } from "./rpc/Hello.client";
 
-@RpcClientModules({
-  RpcClientController:[helloController]
-})
 @Modules({
   Modules: [appModule],
   GlobalPipes: [LogGlobalPipe],

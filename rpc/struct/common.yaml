@@ -1,8 +1,18 @@
 struct:
+
   HelloRequest: 
     name: string
     age: string
     value: string
+  
   HelloResponse:
     message: string
 
+
+  BlowRequest: 
+    name: string
+    age: string
+    value: string
+  
+  BlowResponse:
+    message: string
