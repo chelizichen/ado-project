@@ -1,6 +1,13 @@
-import { AdoNodeController, Body, Controller, Get, Inject } from "ado-node";
+import {
+  AdoNodeController,
+  Body,
+  Controller,
+  Inject,
+  Post,
+  Get
+} from "ado-node";
 import { appService } from "./app.service";
-import { proxyRequest } from "../../config/micro_service";
+import { proxyJavaRequest, proxyRequest } from "../../config/micro_service";
 
 @Controller("/app")
 export class appController extends AdoNodeController {
@@ -15,18 +22,34 @@ export class appController extends AdoNodeController {
     };
   }
 
-  @Get("/proxy")
-  async test(@Body() body:any) {
+  @Post("/proxy")
+  async test(@Body() body: any) {
     const data = await proxyRequest({
       interFace: "Hello",
       method: "hello",
       data: body,
     });
     console.log("data", data);
-    return{
+    return {
       code: 0,
       message: "ClientSide",
-      data
-    }
+      data,
+    };
   }
+
+  @Post("/proxy_java")
+  async javaProxy(@Body() body: any) {
+    const data = await proxyJavaRequest({
+      interFace: "HelloInterFace",
+      method: "hello",
+      data: body,
+    });
+    console.log("data", data);
+    return {
+      code: 0,
+      message: "ClientSide",
+      data,
+    };
+  }
+
 }
