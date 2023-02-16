@@ -25,8 +25,8 @@ export class appController extends AdoNodeController {
   @Post("/proxy")
   async test(@Body() body: any) {
     const data = await proxyRequest({
-      interFace: "Hello",
-      method: "hello",
+      interFace: "HelloInterFace",
+      method: "TestRet",
       data: body,
     });
     console.log("data", data);
@@ -41,7 +41,7 @@ export class appController extends AdoNodeController {
   async javaProxy(@Body() body: any) {
     const data = await proxyJavaRequest({
       interFace: "HelloInterFace",
-      method: "hello",
+      method: "TestRet",
       data: body,
     });
     console.log("data", data);
